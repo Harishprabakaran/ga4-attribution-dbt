@@ -55,4 +55,25 @@ models:
       +materialized: table
       +docs:
         node_color: "green"
+      +partition_by:
+        field: event_date
+        data_type: date
+      # Cluster by user for attribution queries  
+      +cluster_by: ["user_pseudo_id"]        
+
+# Variables for configuration
+vars:
+  # Attribution configuration
+  attribution_lookback_days: 30
+  session_timeout_minutes: 30
+  conversion_events: ['purchase', 'add_to_cart']
+  
+  # Data source configuration  
+  ga4_project_id: 'bigquery-public-data'
+  ga4_dataset_id: 'ga4_obfuscated_sample_ecommerce'
+  ga4_table_pattern: 'events_*'
+
+  # Date range for initial load (last 90 days)
+  start_date: '2020-01-01'
+  end_date: '2020-12-31'
      
